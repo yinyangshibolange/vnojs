@@ -1,0 +1,34 @@
+{
+  "name": "vnojs",
+  "version": "1.0.6",
+  "description": "vnojs,dymatic class,dymatic style",
+  "main": "lib/vno.js",
+  "bin": {
+    "vno": "./bin/start"
+  },
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "node test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http"
+  },
+  "keywords": [
+    "dymatic",
+    "class",
+    "css",
+    "style",
+    "html"
+  ],
+  "files": ["lib/", "bin/"],
+  "author": "hongyu",
+  "license": "ISC",
+  "devDependencies": {
+    "chalk": "^4.0.0",
+    "node-watch": "^0.7.4",
+    "yargs": "^17.7.2"
+  }
+}
