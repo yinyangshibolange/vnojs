@@ -26,17 +26,17 @@ yargs.command({
   },
   async handler (argv) {
     const initTarget = path.resolve(process.cwd(), argv.dir || '', 'vno.config.js')
+    let isFileExist = false
     try {
       const stat = await fs_promises.stat(initTarget)
       if (stat.isFile()) {
-        logger.info("配置文件vno.config.js已存在，无需再次初始化")
-        return true
-      } else {
-        logger.info("vno.config.js不存在，将创建初始配置")
+        isFileExist = true
       }
-    } catch (err) {
+    } catch (err) {}
+    if (isFileExist) {
+      logger.info("配置文件vno.config.js已存在，无需再次初始化")
+    } else {
       logger.info("vno.config.js不存在，将创建初始配置")
-    } finally {
       const readDefaultFile = await fs_promises.readFile(path.resolve(__dirname, "../lib/init.config.js"))
       await fs_promises.writeFile(initTarget, readDefaultFile.toString())
     }
