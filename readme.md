@@ -53,3 +53,12 @@ vno(config)
   console.error(err)
  })
 ```
+
+
+### 获取帮助
+
+```shell
+npx vno --help
+npx vno init --help
+npx vno start --help
+```
