@@ -1,6 +1,6 @@
 {
   "name": "vnojs",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "vnojs,dymatic class,dymatic style",
   "main": "lib/vno.js",
   "bin": {
@@ -26,7 +26,7 @@
   "files": ["lib/", "bin/"],
   "author": "hongyu",
   "license": "ISC",
-  "devDependencies": {
+  "dependencies": {
     "chalk": "^4.0.0",
     "node-watch": "^0.7.4",
     "yargs": "^17.7.2"
