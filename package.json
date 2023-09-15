@@ -1,6 +1,6 @@
 {
   "name": "vnojs",
-  "version": "1.1.2",
+  "version": "1.1.3",
   "description": "vnojs,dymatic class,dymatic style",
   "main": "lib/vno.js",
   "bin": {
