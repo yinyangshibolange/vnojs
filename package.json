@@ -1,6 +1,6 @@
 {
   "name": "vnojs",
-  "version": "1.2.3",
+  "version": "1.2.5",
   "description": "vnojs,dymatic class,dymatic style",
   "main": "./dist/vno.cjs",
   "type": "module",
