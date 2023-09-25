@@ -9,6 +9,33 @@
   "directories": {
     "test": "tests"
   },
+  "exports": {
+    "./package.json": "./package.json",
+    ".": [
+      {
+        "import": "./index.mjs",
+        "require": "./index.cjs"
+      },
+      "./index.cjs"
+    ],
+    "./helpers": {
+      "import": "./helpers/helpers.mjs",
+      "require": "./helpers/index.js"
+    },
+    "./browser": {
+      "import": "./browser.mjs",
+      "types": "./browser.d.ts"
+    },
+    "./yargs": [
+      {
+        "import": "./yargs.mjs",
+        "require": "./yargs"
+      },
+      "./yargs"
+    ]
+  },
+  "type": "module",
+  "module": "./index.mjs",
   "scripts": {
     "test": "node test.js"
   },
