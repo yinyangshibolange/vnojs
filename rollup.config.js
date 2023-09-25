@@ -4,28 +4,40 @@ export default [
   input: 'lib/vno.js',
   output: [
    {
-    file: 'dist/index.mjs',
-    format: 'es'
+    file: 'dist/vno.cjs',
+    format: 'cjs'
    },
    {
-    file: 'dist/index.cjs',
-    format: 'cjs'
+    file: 'dist/vno.mjs',
+    format: 'es'
    },
   ],
   plugins: [terser()]
- }, {
-  input: 'lib/bin.js',
+ },  {
+  input: 'lib/logger.js',
   output: [
    {
-    file: 'bin/vno.cjs',
+    file: 'dist/logger.cjs',
     format: 'cjs'
-   },
-   {
-    file: 'bin/vno.mjs',
+   }, {
+    file: 'dist/logger.mjs',
     format: 'es'
    },
   ],
   plugins: [terser()]
- }
+ },
+ {
+  input: 'lib/default.config.js',
+  output: [
+   {
+    file: 'dist/default.config.cjs',
+    format: 'cjs'
+   }, {
+    file: 'dist/default.config.mjs',
+    format: 'es'
+   },
+  ],
+  plugins: [terser()]
+ },
 ]
 

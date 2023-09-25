@@ -1,23 +1,19 @@
 #!/usr/bin/env node
 
-
-import yargs from "yargs"
-import { hideBin } from 'yargs/helpers'
-import vno from "../lib/vno.js"
-import logger from "../lib/logger.js"
-import path from "path"
-import fs from "fs"
-import defaultConfig from "../lib/default.config.js"
-import yargonaut from "yargonaut"
-
+const yargs = require("yargs")
+const path = require("path")
+const fs = require("fs")
 const fs_promises = fs.promises
+const vno = require("../dist/vno.cjs")
+const logger = require("../dist/logger.cjs")
+const defaultConfig = require("../dist/default.config.cjs")
 
-yargonaut.help('3D-ASCII')
+require('yargonaut')
+  .help('3D-ASCII')
   .helpStyle('green')
   .style('blue')
 
-  const yargsInstance = yargs(hideBin(process.argv))
-  yargsInstance.command({
+yargs.command({
   command: 'init',
   describe: 'init your user space',
   builder: {
@@ -29,7 +25,7 @@ yargonaut.help('3D-ASCII')
     }
   },
   async handler (argv) {
-    const initTarget = path.resolve(process.cwd(), argv.dir || '', 'vno.config.js')
+    const initTarget = path.resolve(process.cwd(), argv.dir || '', 'vno.config.cjs')
     let isFileExist = false
     try {
       const stat = await fs_promises.stat(initTarget)
@@ -41,15 +37,7 @@ yargonaut.help('3D-ASCII')
       logger.info("配置文件vno.config.js已存在，无需再次初始化")
     } else {
       logger.info("vno.config.js不存在，将创建初始配置")
-      let initConfigPath = path.resolve(__dirname, "../config/init.config.js")
-      if (typeof require !== 'undefined' && require.main === module) {
-        // 在命令行环境下执行
-        initConfigPath = path.resolve(__dirname, "../config/init.config.cjs")
-      } else {
-        // 在模块环境下被引入
-        initConfigPath = path.resolve(__dirname, "../config/init.config.mjs")
-      }
-      const readDefaultFile = await fs_promises.readFile(initConfigPath)
+      const readDefaultFile = await fs_promises.readFile(path.resolve(__dirname, "../config/init.config.cjs"))
       await fs_promises.writeFile(initTarget, readDefaultFile.toString())
     }
   }
@@ -89,18 +77,17 @@ yargonaut.help('3D-ASCII')
     }
   },
   async handler (argv) {
-    const configFilePath = path.resolve(process.cwd(), argv.config || 'vno.config.js')
+    const configFilePath = path.resolve(process.cwd(), argv.config || 'vno.config.cjs')
     try {
       await fs_promises.stat(configFilePath)
     } catch (err) {
       logger.error("未找到配置文件，请先配置")
       return err
     }
-    const userConfig = await import(configFilePath)
-    console.log(userConfig)
+    const userConfig = require(configFilePath) || {}
     const config = {
       ...defaultConfig,
-      ...userConfig.default,
+      ...userConfig,
     }
     if (argv.watch) {
       config.watch = argv.watch
