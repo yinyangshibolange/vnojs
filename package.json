@@ -1,10 +1,13 @@
 {
   "name": "vnojs",
-  "version": "1.1.6",
+  "version": "1.1.7",
   "description": "vnojs,dymatic class,dymatic style",
-  "main": "lib/vno.js",
+  "main": "./dist/index.cjs",
   "bin": {
-    "vno": "./bin/start"
+    "vno": {
+      "import": "./bin/vno.mjs",
+      "require": "./bin/vno.cjs"
+    }
   },
   "directories": {
     "test": "tests"
@@ -13,31 +16,17 @@
     "./package.json": "./package.json",
     ".": [
       {
-        "import": "./index.mjs",
-        "require": "./index.cjs"
+        "import": "./dist/index.mjs",
+        "require": "./dist/index.cjs"
       },
-      "./index.cjs"
-    ],
-    "./helpers": {
-      "import": "./helpers/helpers.mjs",
-      "require": "./helpers/index.js"
-    },
-    "./browser": {
-      "import": "./browser.mjs",
-      "types": "./browser.d.ts"
-    },
-    "./yargs": [
-      {
-        "import": "./yargs.mjs",
-        "require": "./yargs"
-      },
-      "./yargs"
+      "./dist/index.cjs"
     ]
   },
   "type": "module",
-  "module": "./index.mjs",
+  "module": "./dist/index.mjs",
   "scripts": {
-    "test": "node test.js"
+    "test": "node test.js",
+    "rollup": "rollup --config"
   },
   "repository": {
     "type": "git",
@@ -51,15 +40,20 @@
     "html"
   ],
   "files": [
-    "lib/",
-    "bin/"
+    "dist/",
+    "bin/",
+    "config/"
   ],
   "author": "hongyu",
   "license": "ISC",
   "dependencies": {
-    "chalk": "^4.0.0",
+    "chalk": "^5.3.0",
     "node-watch": "^0.7.4",
     "yargonaut": "^1.1.4",
     "yargs": "^17.7.2"
+  },
+  "devDependencies": {
+    "@rollup/plugin-terser": "^0.4.3",
+    "rollup": "^3.29.3"
   }
 }

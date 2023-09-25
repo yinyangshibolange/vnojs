@@ -2,6 +2,8 @@
 
 动态css规格，unocss的精简版，全文css搜索，创建匹配规则的css
 
+- 重要更新，自1.1.7开始，本插件支持es模块导入
+
 ## 使用方法
 
 ### 传统方法
@@ -62,3 +64,4 @@ npx vno --help
 npx vno init --help
 npx vno start --help
 ```
+
