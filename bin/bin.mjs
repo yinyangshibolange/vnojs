@@ -7,7 +7,7 @@ import path from "path"
 import fs from "fs"
 import yargonaut from "yargonaut"
 
-import defaultConfig from "./dist/default.config.mjs"
+import defaultConfig from "../dist/default.config.mjs"
 import vno from "../dist/vno.mjs"
 import logger from "../dist/logger.mjs"
 
@@ -35,7 +35,7 @@ yargsInstance.command({
     }
   },
   async handler (argv) {
-    const initTarget = path.resolve(process.cwd(), argv.dir || '', 'vno.config.js')
+    const initTarget = path.resolve(process.cwd(), argv.dir || '', 'vno.config.mjs')
     let isFileExist = false
     try {
       const stat = await fs_promises.stat(initTarget)
@@ -47,14 +47,7 @@ yargsInstance.command({
       logger.info("配置文件vno.config.js已存在，无需再次初始化")
     } else {
       logger.info("vno.config.js不存在，将创建初始配置")
-      let initConfigPath = path.resolve(__dirname, "../config/init.config.js")
-      if (typeof require !== 'undefined' && require.main === module) {
-        // 在命令行环境下执行
-        initConfigPath = path.resolve(__dirname, "../config/init.config.cjs")
-      } else {
-        // 在模块环境下被引入
-        initConfigPath = path.resolve(__dirname, "../config/init.config.mjs")
-      }
+      let initConfigPath = path.resolve(__dirname, "../config/init.config.mjs")
       const readDefaultFile = await fs_promises.readFile(initConfigPath)
       await fs_promises.writeFile(initTarget, readDefaultFile.toString())
     }
@@ -95,18 +88,15 @@ yargsInstance.command({
     }
   },
   async handler (argv) {
-    const configFilePath = path.resolve(process.cwd(), argv.config || 'vno.config.js')
+    const configFilePath =  path.resolve(process.cwd(), argv.config || 'vno.config.mjs')
     try {
       await fs_promises.stat(configFilePath)
     } catch (err) {
       logger.error("未找到配置文件，请先配置")
       return err
     }
-    logger.error(configFilePath)
     // 动态导入地址configFilePath
-
-    const userConfig = await import('vnojs/vno.config.js')
-    console.log(userConfig)
+    const userConfig = await import('file:///' + configFilePath)
     const config = {
       ...defaultConfig,
       ...userConfig.default,

@@ -1,12 +1,13 @@
 {
   "name": "vnojs",
-  "version": "1.1.9",
+  "version": "1.2.2",
   "description": "vnojs,dymatic class,dymatic style",
   "main": "./dist/vno.cjs",
   "type": "module",
   "module": "./dist/vno.mjs",
   "bin": {
-    "vno": "./bin/bin.cjs"
+    "vno": "./bin/bin.cjs",
+    "vnoes": "./bin/bin.mjs"
   },
   "directories": {
     "test": "tests"
