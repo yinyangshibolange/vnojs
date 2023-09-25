@@ -2,11 +2,12 @@
 
 
 import yargs from "yargs"
-import vno from "../lib/vno"
-import logger from "../lib/logger"
+import { hideBin } from 'yargs/helpers'
+import vno from "../lib/vno.js"
+import logger from "../lib/logger.js"
 import path from "path"
 import fs from "fs"
-import defaultConfig from "../lib/default.config"
+import defaultConfig from "../lib/default.config.js"
 import yargonaut from "yargonaut"
 
 const fs_promises = fs.promises
@@ -15,7 +16,8 @@ yargonaut.help('3D-ASCII')
   .helpStyle('green')
   .style('blue')
 
-yargs.command({
+  const yargsInstance = yargs(hideBin(process.argv))
+  yargsInstance.command({
   command: 'init',
   describe: 'init your user space',
   builder: {
@@ -95,6 +97,7 @@ yargs.command({
       return err
     }
     const userConfig = await import(configFilePath)
+    console.log(userConfig)
     const config = {
       ...defaultConfig,
       ...userConfig.default,

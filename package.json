@@ -1,13 +1,12 @@
 {
   "name": "vnojs",
-  "version": "1.1.7",
+  "version": "1.1.8",
   "description": "vnojs,dymatic class,dymatic style",
   "main": "./dist/index.cjs",
+  "type": "module",
+  "module": "./dist/index.mjs",
   "bin": {
-    "vno": {
-      "import": "./bin/vno.mjs",
-      "require": "./bin/vno.cjs"
-    }
+    "vno": "./bin/bin.js"
   },
   "directories": {
     "test": "tests"
@@ -19,11 +18,9 @@
         "import": "./dist/index.mjs",
         "require": "./dist/index.cjs"
       },
-      "./dist/index.cjs"
+      "./dist/index.mjs"
     ]
   },
-  "type": "module",
-  "module": "./dist/index.mjs",
   "scripts": {
     "test": "node test.js",
     "rollup": "rollup --config"
