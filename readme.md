@@ -22,6 +22,12 @@ npx vno init
 
 将在运行目录下生成一个vno.config.js配置文件
 
+如果es模块系统，使用下面这个脚本
+
+```shell
+npx vnoes init
+```
+
 3. 按需修改配置文件
 
 4. 编译并监听文件夹
@@ -36,6 +42,17 @@ npx vno start
 {
  "scripts": {
   "vno:start": "vno init && vno start -w src -e vue -t src/assets/vno.css"
+ }
+}
+
+```
+
+如果项目中用type:module 限制了项目模块系统，则使用下面这个脚本
+
+```json
+{
+ "scripts": {
+  "vno:start": "vnoes init && vnoes start -w src -e vue -t src/assets/vno.css"
  }
 }
 
@@ -56,6 +73,19 @@ vno(config)
  })
 ```
 
+es导入方式
+
+```nodejs
+import  vno  from "vno"
+import config from "./vno.config.js" // your vno config
+vno(config)
+ .then(() => {
+  console.log("编译完成，开始监听文件夹")
+ })
+ .catch(err => {
+  console.error(err)
+ })
+```
 
 ### 获取帮助
 
@@ -65,3 +95,10 @@ npx vno init --help
 npx vno start --help
 ```
 
+vnoes帮助
+
+```shell
+npx vnoes --help
+npx vnoes init --help
+npx vnoes start --help
+```
